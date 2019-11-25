@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 run apt update
+run apt -y install openjdk-8-jdk
 workdir /opt/
 add https://www-eu.apache.org/dist/tomcat/tomcat-9/v9.0.29/bin/apache-tomcat-9.0.29.tar.gz
 run tar -xvzf apache-tomcat-9.0.29.tar.gz
