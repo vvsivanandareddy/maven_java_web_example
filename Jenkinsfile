@@ -14,13 +14,13 @@ properties([
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return[\'Could not get Env\']'
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return["dev","qA","stage","prod"]'
                 ]
@@ -37,13 +37,13 @@ properties([
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return[\'Could not get service\']'
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return ["Onboarding", "BO", "Cards", "IB", "IMS"]'
                 ]
