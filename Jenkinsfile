@@ -49,37 +49,8 @@ properties([
                 ]
             ]
         ]
-        [$class: 'CascadeChoiceParameter', 
-            
-            referencedParameters: 'environment', 
-            script: [
-                $class: 'GroovyScript', 
-                fallbackScript: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 
-                        'return[\'Could not get Environment from Env Param\']'
-                ], 
-                script: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 
-                        ''' if(environment.equals("dev")){
-                                return "$DEV_NODE<input type=\"hidden\" name=\"value\" value=\"$DEV_NODE\" />";
-                            }
-                            else if(environment.equals("qa")){
-                                 return "$QA_NODE<input type=\"hidden\" name=\"value\" value=\"$QA_NODE\" />";
-                            }
-                            else if(environment.equals("stage")){
-                                return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
-                            }
-                            else if(environment.equals("prod")){
-	                             return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
-                            }
-                        '''
-                ]
-            ]
-        ]
+        
+        
     ])
 ])
 
