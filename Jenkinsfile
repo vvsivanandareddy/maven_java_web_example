@@ -7,9 +7,9 @@ properties([
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Env Name from the Dropdown List', 
             filterLength: 1, 
-            filterable: true, 
+            filterable: false, 
             name: 'environment', 
-            randomName: 'choice-parameter-5631314439613978', 
+           // randomName: 'choice-parameter-5631314439613978', 
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: [
@@ -30,9 +30,9 @@ properties([
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Service you want to build', 
             filterLength: 1, 
-            filterable: true, 
+            filterable: false, 
             name: 'service_pipeline', 
-            randomName: 'choice-parameter-5631314439613978', 
+           // randomName: 'choice-parameter-5631314439613978', 
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: [
