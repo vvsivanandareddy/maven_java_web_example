@@ -79,6 +79,8 @@ properties([
 	  return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
 }
         ]
+	]
+	]
         
     ])
 ])
