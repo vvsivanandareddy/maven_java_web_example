@@ -49,6 +49,35 @@ properties([
                 ]
             ]
         ]
+      [$class: 'CascadeChoiceParameter', 
+           // choiceType: 'PT_SINGLE_SELECT', 
+            description: 'Select the Server from the Dropdown List', 
+            filterLength: 1, 
+            filterable: false, 
+            name: 'node', 
+            randomName: 'choice-parameter-5631314456178619', 
+            referencedParameters: 'Env', 
+            script: [
+                $class: 'GroovyScript', 
+                fallbackScript: [
+                    classpath: [], 
+                    sandbox: true, 
+                    script: 
+                        'return[\'Could not get Environment from Env Param\']'
+                ], 
+                script: [
+                    classpath: [], 
+                    sandbox: true, 
+                    script: 
+                        ''' if(environment.equals("dev")){
+     return "$DEV_NODE<input type=\"hidden\" name=\"value\" value=\"$DEV_NODE\" />";
+}else if(environment.equals("qa")){
+      return "$QA_NODE<input type=\"hidden\" name=\"value\" value=\"$QA_NODE\" />";
+}else if(environment.equals("stage")){
+      return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
+}else if(environment.equals("prod")){
+	  return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
+}
         
         
     ])
