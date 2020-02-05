@@ -7,20 +7,20 @@ properties([
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Env Name from the Dropdown List', 
             filterLength: 1, 
-            filterable: false, 
-            name: 'environment', 
-           // randomName: 'choice-parameter-5631314439613978', 
+            filterable: true, 
+            name: 'environment1', 
+            randomName: 'choice-parameter-5631314439613978', 
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: true, 
+                    sandbox: false, 
                     script: 
                         'return[\'Could not get Env\']'
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: true, 
+                    sandbox: false, 
                     script: 
                         'return["dev","qA","stage","prod"]'
                 ]
@@ -30,58 +30,55 @@ properties([
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Service you want to build', 
             filterLength: 1, 
-            filterable: false, 
+            filterable: true, 
             name: 'service_pipeline', 
-           // randomName: 'choice-parameter-5631314439613978', 
+            randomName: 'choice-parameter-5631314439613978', 
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: true, 
+                    sandbox: false, 
                     script: 
                         'return[\'Could not get service\']'
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: true, 
+                    sandbox: false, 
                     script: 
                         'return ["Onboarding", "BO", "Cards", "IB", "IMS"]'
                 ]
             ]
         ]
-      [$class: 'CascadeChoiceParameter', 
-           // choiceType: 'PT_SINGLE_SELECT', 
-            description: 'Select the Server from the Dropdown List', 
-            filterLength: 1, 
-            filterable: false, 
-            name: 'node', 
-            randomName: 'choice-parameter-5631314456178619', 
-            referencedParameters: 'Env', 
-            script: [
-                $class: 'GroovyScript', 
-                fallbackScript: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 
-                        'return[\'Could not get Environment from Env Param\']'
-                ], 
-                script: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 
-                        ''' if(environment.equals("dev")){
-     return "$DEV_NODE<input type=\"hidden\" name=\"value\" value=\"$DEV_NODE\" />";
-}else if(environment.equals("qa")){
-      return "$QA_NODE<input type=\"hidden\" name=\"value\" value=\"$QA_NODE\" />";
-}else if(environment.equals("stage")){
-      return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
-}else if(environment.equals("prod")){
-	  return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
-}
-        ]
-	]
-	]
-        
+         parameters {
+                  activeChoiceParam('environment') {
+                      description('select your choice')
+                      choiceType('RADIO')
+                      groovyScript {
+                          script("return ["dev", "qa", "stage", "prod"]")
+                          fallbackScript('return ["error"]')
+                      }
+                  }
+                  activeChoiceReactiveParam('node') {
+                      //description('select your choice')
+                     // choiceType('RADIO')
+                      groovyScript {
+                          script("if(environment.equals("dev")){
+                                return "$DEV_NODE<input type=\"hidden\" name=\"value\" value=\"$DEV_NODE\" />";
+                                }
+                                else if(environment.equals("qa")){
+                                    return "$QA_NODE<input type=\"hidden\" name=\"value\" value=\"$QA_NODE\" />";
+                                }
+                                else if(environment.equals("stage")){
+                                    return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
+                                }
+                                else if(environment.equals("prod")){
+	                                return "$STAGE_NODE<input type=\"hidden\" name=\"value\" value=\"$STAGE_NODE\" />";
+                                }
+                          fallbackScript('return ["error"]')
+                          referencedParameter('environment')
+                      }
+         }      
+                 
     ])
 ])
 
